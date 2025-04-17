@@ -23,9 +23,18 @@
     <h2>Your Cart</h2>
     <ul id="cart-items"></ul>
     <p>Total: KSH <span id="total-price">0</span></p>
+
     <form id="checkout-form">
+      <h3>Submit Your Order</h3>
+      <label for="customer-name">Name:</label>
+      <input type="text" id="customer-name" placeholder="Your Name" required>
+
+      <label for="customer-email">Email Address:</label>
+      <input type="email" id="customer-email" placeholder="Your Email" required>
+
       <label for="delivery-date">Delivery Date:</label>
       <input type="date" id="delivery-date" required>
+
       <button type="submit">Place Order</button>
     </form>
   </section>
