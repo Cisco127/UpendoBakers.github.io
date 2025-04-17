@@ -4,7 +4,7 @@ let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
 
 // Add to cart function
 function addToCart(item, price) {
-  console.log(`Adding to cart: ${item} - KSH ${price}`);
+  console.log(`Adding item to cart: ${item} - KSH ${price}`);
   cart.push({ item, price });
   totalPrice += price;
 
@@ -25,7 +25,7 @@ function updateCart() {
     return;
   }
 
-  cartItems.innerHTML = '';
+  cartItems.innerHTML = ''; // Clear existing cart items
   cart.forEach(({ item, price }) => {
     const li = document.createElement('li');
     li.textContent = `${item} - KSH ${price}`;
@@ -34,6 +34,25 @@ function updateCart() {
 
   totalPriceEl.textContent = totalPrice.toFixed(2); // Format total price to 2 decimal places
 }
+
+// Manual item addition
+document.getElementById('manual-item-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const itemName = document.getElementById('manual-item-name').value.trim();
+  const itemPrice = parseFloat(document.getElementById('manual-item-price').value);
+
+  if (!itemName || isNaN(itemPrice) || itemPrice <= 0) {
+    alert('Please provide valid item details.');
+    return;
+  }
+
+  addToCart(itemName, itemPrice);
+
+  // Clear the input fields
+  document.getElementById('manual-item-name').value = '';
+  document.getElementById('manual-item-price').value = '';
+});
 
 // Handle order submission
 document.getElementById('checkout-form').addEventListener('submit', function (e) {
@@ -70,7 +89,7 @@ function sendOrderEmail(deliveryDate) {
 }
 
 // Initialize EmailJS
-emailjs.init('R7o5vXZj4pDkmFH_B');
+emailjs.init('Ysp1AqXg3LAEEV5RD');
 
 // Update cart on page load
 updateCart();
